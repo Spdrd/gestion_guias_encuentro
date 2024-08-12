@@ -28,8 +28,8 @@ def leer_csv(guias):
           asistencias.append(ig.Cumplimiento.NO_CUMPLIDO)
         elif int(pre_enum) == -1:
           asistencias.append(ig.Cumplimiento.PENDIENTE)
-      guia = ig.Guia(linea["id"], linea["nombre"], linea["lider"],
-                     linea["edad"], linea["telefono"], asistencias)
+      guia = ig.Guia(int(linea["id"]), linea["nombre"], linea["lider"],
+                     int(linea["edad"]), linea["telefono"], asistencias)
       guias.append(guia)
 
 
@@ -53,7 +53,7 @@ def agregar_guia(guias):
 def tomar_asistencia(guias):
   print("Escoger fecha")
   for fecha in ig.fechas:
-    print(ig.fechas.index(fecha) + ") " + fecha.strftime("%d-%m-%Y"))
+    print(str(ig.fechas.index(fecha)) + ") " + fecha.strftime("%d-%m-%Y"))
 
   seleccion_fecha: int = int(input())
 
@@ -64,7 +64,7 @@ def tomar_asistencia(guias):
       break
     for guia in guias:
       if guia.id == guia_presente:
-        guia.asistencia[seleccion_fecha] = ig.Cumplimiento.CUMPLIDO
+        guia.asistencias[seleccion_fecha] = ig.Cumplimiento.CUMPLIDO
         break
 
 def imprimir_datos(guias):
@@ -90,6 +90,8 @@ def menu(guias):
       tomar_asistencia(guias)
     elif seleccion == 5:
       imprimir_datos(guias)
-    if seleccion == 9:
+    elif seleccion == 9:
       break
+    else:
+      print("Selección inválida")
     

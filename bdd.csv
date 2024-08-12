@@ -1,7 +1,7 @@
 id,nombre,lider,edad,telefono,asistencia: 10-08-2024,asistencia: 17-08-2024,asistencia: 24-08-2024,asistencia: 31-08-2024,asistencia: 07-09-2024,asistencia: 14-09-2024,asistencia: 21-09-2024,asistencia: 28-09-2024,asistencia: 05-10-2024,asistencia: 12-10-2024,asistencia: 19-10-2024,asistencia: 26-10-2024,asistencia: 05-10-2024
 1,Juan Jose Sanchez,Niky,16,3205137362,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
 2,Danna Monta�ez,Lau,17,3223711655,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
-3,Sarys,Lau,17,3152225503,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
+3,Sarys,Lau,17,3152225503,1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
 4,Vale Bohorguez,Lau,18,3012151564,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
 5,Lore Virguez,Kelly,19,3103439591,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
 6,Valentina Ardila,Kelly,17,3115685797,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1

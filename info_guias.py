@@ -36,7 +36,7 @@ class Guia:
                lider: str,
                edad: int,
                telefono: str,
-               asistencias=[Cumplimiento.PENDIENTE] * len(fechas)):
+               asistencias = [Cumplimiento.PENDIENTE] * len(fechas)):
     self.id = id
     self.nombre = nombre
     self.lider = lider

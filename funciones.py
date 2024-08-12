@@ -12,7 +12,7 @@ def escribir_csv(guias):
     for guia in guias:
       linea = [guia.id, guia.nombre, guia.lider, guia.edad, guia.telefono]
       for asist in guia.asistencias:
-        linea.append(asist.value)
+        linea.append(asist.name)
       escritor.writerow(linea)
 
 def leer_csv(guias):
@@ -22,11 +22,11 @@ def leer_csv(guias):
       asistencias = []
       for fecha in ig.fechas:
         pre_enum = linea["asistencia: " + fecha.strftime("%d-%m-%Y")]
-        if int(pre_enum) == 1:
+        if pre_enum == "CUMPLIDO":
           asistencias.append(ig.Cumplimiento.CUMPLIDO)
-        elif int(pre_enum) == 0:
+        elif pre_enum == "NO_CUMPLIDO":
           asistencias.append(ig.Cumplimiento.NO_CUMPLIDO)
-        elif int(pre_enum) == -1:
+        elif pre_enum == "PENDIENTE":
           asistencias.append(ig.Cumplimiento.PENDIENTE)
       guia = ig.Guia(int(linea["id"]), linea["nombre"], linea["lider"],
                      int(linea["edad"]), linea["telefono"], asistencias)
@@ -67,6 +67,16 @@ def tomar_asistencia(guias):
         guia.asistencias[seleccion_fecha] = ig.Cumplimiento.CUMPLIDO
         break
 
+def marcar_inasistencias(guias):
+  print("Escoger fecha")
+  for fecha in ig.fechas:
+    print(str(ig.fechas.index(fecha)) + ") " + fecha.strftime("%d-%m-%Y"))
+
+  seleccion_fecha: int = int(input())
+  for guia in guias:
+    if guia.asistencias[seleccion_fecha] != ig.Cumplimiento.CUMPLIDO:
+      guia.asistencias[seleccion_fecha] = ig.Cumplimiento.NO_CUMPLIDO
+
 def imprimir_datos(guias):
   for guia in guias:
     print(guia)
@@ -77,7 +87,8 @@ def menu(guias):
     print("2) Guardar Archivo")
     print("3) Agregar Guia")
     print("4) Tomar Asistencia")
-    print("5) Imprimir Datos")
+    print("5) Marcar Inasistencias")
+    print("6) Imprimir Datos")
     print("9) Salir")
     seleccion = int(input())
     if seleccion == 1:
@@ -89,6 +100,8 @@ def menu(guias):
     elif seleccion == 4:
       tomar_asistencia(guias)
     elif seleccion == 5:
+      marcar_inasistencias(guias)
+    elif seleccion == 6:
       imprimir_datos(guias)
     elif seleccion == 9:
       break

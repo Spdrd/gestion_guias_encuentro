@@ -16,6 +16,7 @@ def escribir_csv(guias):
       escritor.writerow(linea)
 
 def leer_csv(guias):
+  guias = []
   with open("bdd.csv", "r") as csvfile:
     lector = csv.DictReader(csvfile)
     for linea in lector:

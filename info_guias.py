@@ -7,6 +7,9 @@ class Cumplimiento(Enum):
   NO_CUMPLIDO = 0
   PENDIENTE = -1
 
+  def __repr__(self):
+    return f"{self.value}"
+
 
 fechas = [
     dt.datetime(day=10, month=8, year=2024),
@@ -28,12 +31,12 @@ fechas = [
 class Guia:
 
   def __init__(self,
-               id,
-               nombre,
-               lider,
-               edad,
-               telefono,
-               asistencias=[Cumplimiento.PENDIENTE] * 12):
+               id: int,
+               nombre: str,
+               lider: str,
+               edad: int,
+               telefono: str,
+               asistencias=[Cumplimiento.PENDIENTE] * len(fechas)):
     self.id = id
     self.nombre = nombre
     self.lider = lider

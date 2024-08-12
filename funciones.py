@@ -21,7 +21,75 @@ def leer_csv(guias):
     for linea in lector:
       asistencias = []
       for fecha in ig.fechas:
-        asistencias.append(linea[fecha])
+        pre_enum = linea["asistencia: " + fecha.strftime("%d-%m-%Y")]
+        if int(pre_enum) == 1:
+          asistencias.append(ig.Cumplimiento.CUMPLIDO)
+        elif int(pre_enum) == 0:
+          asistencias.append(ig.Cumplimiento.NO_CUMPLIDO)
+        elif int(pre_enum) == -1:
+          asistencias.append(ig.Cumplimiento.PENDIENTE)
       guia = ig.Guia(linea["id"], linea["nombre"], linea["lider"],
                      linea["edad"], linea["telefono"], asistencias)
       guias.append(guia)
+
+
+def agregar_guia(guias):
+  while True:
+    print("Ingrese id [-1 para salir]")
+    id = int(input())
+    if id == -1:
+      break
+    print("Ingrese nombre")
+    nombre = input()
+    print("Ingrese lider")
+    lider = input()
+    print("Ingrese edad")
+    edad = int(input())
+    print("Ingrese telefono")
+    telefono = input()
+    guia = ig.Guia(id, nombre, lider, edad, telefono)
+    guias.append(guia)
+
+def tomar_asistencia(guias):
+  print("Escoger fecha")
+  for fecha in ig.fechas:
+    print(ig.fechas.index(fecha) + ") " + fecha.strftime("%d-%m-%Y"))
+
+  seleccion_fecha: int = int(input())
+
+  while True:
+    print("Ingrese id de guia presente [-1 para salir]")
+    guia_presente: int = int(input())
+    if guia_presente == -1:
+      break
+    for guia in guias:
+      if guia.id == guia_presente:
+        guia.asistencia[seleccion_fecha] = ig.Cumplimiento.CUMPLIDO
+        break
+
+def imprimir_datos(guias):
+  for guia in guias:
+    print(guia)
+
+def menu(guias):
+  while True:
+    print("1) Leer Archivo")
+    print("2) Guardar Archivo")
+    print("3) Agregar Guia")
+    print("4) Tomar Asistencia")
+    print("5) Imprimir Datos")
+    print("9) Salir")
+    seleccion = int(input())
+    if seleccion == 1:
+      leer_csv(guias)
+    elif seleccion == 2:
+      escribir_csv(guias)
+    elif seleccion == 3:
+      agregar_guia(guias)
+    elif seleccion == 4:
+      tomar_asistencia(guias)
+    elif seleccion == 5:
+      imprimir_datos(guias)
+    if seleccion == 9:
+      break
+    

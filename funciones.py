@@ -16,6 +16,7 @@ def escribir_csv(guias):
       escritor.writerow(linea)
 
 def leer_csv(guias):
+  guias.clear()
   with open("bdd.csv", "r") as csvfile:
     lector = csv.DictReader(csvfile)
     for linea in lector:
@@ -66,22 +67,16 @@ def tomar_asistencia(guias):
       seleccion_fecha = int(seleccion_fecha)
       break
     else:
-      print("fecha no valida, intenta otra vez")
+      print("fecha no valida, intenta otra vez [-1 para salir]")
 
   while var_control:
-    print("Ingrese id de guia presente [-1 para salir]")
-    guia_presente = input()
-    if guia_presente.isnumeric() or guia_presente == "-1":
-        guia_presente = int(guia_presente)
-
-    if guia_presente == -1:
-      var_control = False 
-      break
-    for guia in guias:
-      if guia.id == guia_presente:
-        guia.asistencias[seleccion_fecha] = ig.Cumplimiento.CUMPLIDO
-        break
-
+    guia = buscar_guia(guias)
+    if guia is not None:
+      guia.asistencias[seleccion_fecha] = ig.Cumplimiento.CUMPLIDO
+      print(f"Asistencia de {guia.nombre} tomada")
+    else:
+      var_control = False
+    
 def marcar_inasistencias(guias):
   print("Escoger fecha [-1 para salir]")
   for fecha in ig.fechas:
@@ -97,7 +92,7 @@ def marcar_inasistencias(guias):
       seleccion_fecha = int(seleccion_fecha)
       break
     else:
-      print("fecha no valida, intenta otra vez")
+      print("fecha no valida, intenta otra vez [-1 para salir]")
   if var_control:
     for guia in guias:
       if guia.asistencias[seleccion_fecha] != ig.Cumplimiento.CUMPLIDO:
@@ -118,8 +113,8 @@ def buscar_guia(guias):
     if entrada.isnumeric():
       for guia in guias:
         if guia.id == int(entrada):
-          guia_encontrado = True
           print(f"Guia {guia.nombre} encontrado")
+          var_control = False
           return guia
     else:
       guias_encontrados = []
@@ -133,6 +128,7 @@ def buscar_guia(guias):
         if seleccion.isnumeric():
           seleccion = int(seleccion)
           if seleccion >= 0 and seleccion < len(guias_encontrados):
+            var_control = False
             return guias_encontrados[seleccion]
     print("Guia no encontrado")
   return None

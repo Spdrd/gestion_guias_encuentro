@@ -124,9 +124,7 @@ def buscar_guia(guias):
     else:
       guias_encontrados = []
       for guia in guias:
-        if entrada in guia.nombre:
-          print("a")
-          guias_encontrados.append(guia)
+        if (entrada.lower()) in (guia.nombre.lower()):          guias_encontrados.append(guia)
       if len(guias_encontrados) > 0:
         print("Escoger Guia")
         for guia in guias_encontrados:

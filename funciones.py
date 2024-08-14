@@ -1,6 +1,6 @@
 import csv
 import info_guias as ig
-
+##prueba
 
 def escribir_csv(guias):
   with open('bdd.csv', 'w', newline='') as csvfile:
